@@ -1,0 +1,35 @@
+
+[ 1번 코드 ]
+
+SELECT CategoryName, COUNT(ProductName) AS [Number of products] FROM
+(
+    SELECT 
+        Categories.CategoryName AS [CategoryName],
+        Categories.CategoryID AS [CategoryID],
+        Products.ProductName AS [ProductName]
+
+    FROM 
+        Categories,
+        Products
+
+    WHERE
+        Categories.CategoryID = Products.CategoryID
+)
+GROUP BY CategoryName;
+
+
+
+[ 2번 코드 ]
+
+SELECT CustomerName FROM
+(
+	SELECT *
+	FROM 
+    	OrderDetails, Products, Orders, Customers
+	WHERE 
+    	OrderDetails.ProductID = Products.ProductID and OrderDetails.OrderID = Orders.OrderID and Orders.CustomerID = Customers.CustomerID
+)
+WHERE Quantity * Price >= 10000;
+
+
+
